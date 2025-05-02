@@ -50,3 +50,6 @@ Route::get('/book', [QueryController::class,'book']);
 
 Route::get('/form-create', [FormController::class, 'formCreate']);
 Route::post('/form-store', [FormController::class, 'storeForm']);
+Route::get('/form-index', [FormController::class, 'index']);
+Route::get('/form-read', [FormController::class, 'redForm'])->name('read.data');
+Route::delete('/form-delete/{id}', [FormController::class, 'deleteForm'])->name('delete.data');
