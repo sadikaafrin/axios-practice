@@ -48,8 +48,13 @@ Route::get('/delete-session', [SessionController::class, 'deleteSession']);
 Route::get('/show', [QueryController::class,'show']);
 Route::get('/book', [QueryController::class,'book']);
 
-Route::get('/form-create', [FormController::class, 'formCreate']);
+Route::get('/form-create', [FormController::class, 'formCreate'])->name('create');
 Route::post('/form-store', [FormController::class, 'storeForm']);
 Route::get('/form-index', [FormController::class, 'index']);
 Route::get('/form-read', [FormController::class, 'redForm'])->name('read.data');
+Route::get('/form-edit-view', function () {
+    return view('form.edit'); // this shows the blank form
+});
+Route::get('/form-edit/{id}', [FormController::class, 'editForm'])->name('edit.data');
+Route::post('/form-update/{id}', [FormController::class, 'updateForm'])->name('form.update');
 Route::delete('/form-delete/{id}', [FormController::class, 'deleteForm'])->name('delete.data');

@@ -8,7 +8,6 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.0/css/dataTables.dataTables.css">
 
 
@@ -16,6 +15,7 @@
 
 <body>
     <div class="container mt-4">
+        <a href="{{ route('create') }}" class="bg-black"><button class="btn btn-primary">Create Form</button></a>
         <table id="users-table" class="display">
             <thead>
                 <tr>
@@ -60,6 +60,12 @@
             });
         });
 
+        //  Edit button click handler
+         $('#users-table').on('click', '.edit-button', function() {
+                var id = $(this).data('id');
+                window.location = '/form-edit/' + id;
+            });
+
         function deleteItem(id) {
         let url = '{{ route('delete.data', ':id') }}';
         let csrfToken = '{{ csrf_token() }}';
@@ -74,7 +80,7 @@
                     console.log(resp);
                     // Reload DataTable
                     $('#users-table').DataTable().ajax.reload();
-                    alert('Data deleted successfully!'); // Show a simple success message
+                    alert('Data deleted successfully!');
                 },
                 error: function(error) {
                     console.error(error);
@@ -83,7 +89,7 @@
             });
         }
     }
-       
+
     </script>
 
 </body>
