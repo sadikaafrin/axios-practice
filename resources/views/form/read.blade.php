@@ -61,35 +61,32 @@
         });
 
         //  Edit button click handler
-         $('#users-table').on('click', '.edit-button', function() {
-                var id = $(this).data('id');
-                window.location = '/form-edit/' + id;
-            });
+        $('#users-table').on('click', '.edit-button', function() {
+            var id = $(this).data('id');
+            window.location = '/form-edit/' + id;
+        });
+
 
         function deleteItem(id) {
-        let url = '{{ route('delete.data', ':id') }}';
-        let csrfToken = '{{ csrf_token() }}';
-        if (confirm('Are you sure you want to delete this data?')) {
-            $.ajax({
-                type: "DELETE",
-                url: url.replace(':id', id),
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                success: function(resp) {
-                    console.log(resp);
-                    // Reload DataTable
-                    $('#users-table').DataTable().ajax.reload();
-                    alert('Data deleted successfully!');
-                },
-                error: function(error) {
-                    console.error(error);
-                    alert('Error deleting data.');
-                }
-            });
+            const url = '{{ route('delete.data', ':id') }}'.replace(':id', id);
+            let csrfToken = '{{ csrf_token() }}';
+            if (confirm('Are you sure you want to delete this data?')) {
+                axios.delete(url, {
+                        header: {
+                            'X-CSRF-TOKEN': csrfToken
+                        }
+                    })
+                    .then(function(response) {
+                        console.log(response.data);
+                        $('#users-table').DataTable().ajax.reload();
+                        alert('Data deleted successfully!');
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                        alert('Error deleting data.');
+                    });
+            }
         }
-    }
-
     </script>
 
 </body>

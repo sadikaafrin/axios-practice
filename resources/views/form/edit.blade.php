@@ -35,8 +35,6 @@
                 let name = $('#edit_name').val();
                 let url = '/form-update/' + id;
 
-
-
                 axios.post(url, {
                         'name': name
                     }, {
