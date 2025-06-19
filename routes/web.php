@@ -8,6 +8,7 @@ use App\Http\Controllers\web\backend\CategoryController;
 use App\Http\Controllers\web\backend\SessionController;
 use App\Http\Controllers\web\backend\SiteController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -49,7 +50,7 @@ Route::get('/show', [QueryController::class,'show']);
 Route::get('/book', [QueryController::class,'book']);
 
 Route::get('/form-create', [FormController::class, 'formCreate'])->name('create');
-Route::post('/form-store', [FormController::class, 'storeForm']);
+Route::post('/form-store', [FormController::class, 'storeForm'])->name('form.store');
 Route::get('/form-index', [FormController::class, 'index']);
 Route::get('/form-read', [FormController::class, 'redForm'])->name('read.data');
 Route::get('/form-edit-view', function () {
@@ -58,3 +59,9 @@ Route::get('/form-edit-view', function () {
 Route::get('/form-edit/{id}', [FormController::class, 'editForm'])->name('edit.data');
 Route::post('/form-update/{id}', [FormController::class, 'updateForm'])->name('form.update');
 Route::delete('/form-delete/{id}', [FormController::class, 'deleteForm'])->name('delete.data');
+
+Route::get('/employee',[EmployeeController::class, 'index'])->name('index');
+Route::post('/store',[EmployeeController::class,  'store'])->name('store');
+Route::get('/edit',[EmployeeController::class,  'edit'])->name('edit');
+Route::post('/update',[EmployeeController::class,  'update'])->name('update');
+Route::post('/delete',[EmployeeController::class,  'delete'])->name('delete');

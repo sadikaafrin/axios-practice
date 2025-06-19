@@ -10,7 +10,6 @@
   <body>
     <div class="container mt-4">
         <form>
-
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Name</label>
               <input type="text" class="form-control" id="name" name="name">
@@ -21,17 +20,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="backend/axios.min.js"></script>
 
-    <script>
+    {{-- <script>
         async function createData(){
             let name = document.getElementById('name').value;
             let obj = {
                 'name':name,
             }
-            let url = '/form-store'
+            let url = '{{route('form.store')}}'
             let res = await axios.post(url, obj)
-            window.location = '/form-create'
+            window.location = '/form-read'
 
         }
-    </script>
+    </script> --}}
+
+<script>
+ async function createData(){
+    let name = document.getElementById('name').value;
+    let obj = {
+        'name': name,
+    }
+    let url = '{{ route('form.store') }}'
+    let response = await axios.post(url,obj)
+    window.location = '/form-read'
+ }
+</script>
   </body>
 </html>
